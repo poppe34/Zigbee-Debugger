@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>1.0</ProjectVersion>
+    <ProjectGuid>{ea63e9d9-274a-4cb5-bef3-2521cdd8ce75}</ProjectGuid>
+    <avrdevice>AT90USB1287</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputFile>$(MSBuildProjectName).elf</OutputFile>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <AvrGccProjectExtensions>
+    </AvrGccProjectExtensions>
+    <AssemblyName>AVRGCC1</AssemblyName>
+    <Name>debugger-mega</Name>
+    <RootNamespace>AVRGCC1</RootNamespace>
+    <avrtool>com.atmel.avrdbg.tool.jtagicemkii</avrtool>
+    <avrtoolinterface>JTAG</avrtoolinterface>
+    <com_atmel_avrdbg_tool_simulator>
+      <ToolType>com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolName>AVR Simulator</ToolName>
+      <ToolNumber>
+      </ToolNumber>
+      <Channel>
+        <host>127.0.0.1</host>
+        <port>49332</port>
+        <ssl>False</ssl>
+      </Channel>
+    </com_atmel_avrdbg_tool_simulator>
+    <com_atmel_avrdbg_tool_jtagicemkii>
+      <ToolType>com.atmel.avrdbg.tool.jtagicemkii</ToolType>
+      <ToolName>JTAGICE mkII</ToolName>
+      <ToolNumber>00B000002621</ToolNumber>
+      <Channel>
+        <host>127.0.0.1</host>
+        <port>49224</port>
+        <ssl>False</ssl>
+      </Channel>
+      <ToolOptions>
+        <InterfaceType>JTAG</InterfaceType>
+        <InterfaceProperties>
+          <JtagDbgClock>1000000</JtagDbgClock>
+          <JtagProgClock>1000000</JtagProgClock>
+          <IspClock>150000</IspClock>
+          <JtagInChain>false</JtagInChain>
+          <JtagDevicesBefore>0</JtagDevicesBefore>
+          <JtagDevicesAfter>0</JtagDevicesAfter>
+          <JtagInstrBitsBefore>0</JtagInstrBitsBefore>
+          <JtagInstrBitsAfter>0</JtagInstrBitsAfter>
+        </InterfaceProperties>
+      </ToolOptions>
+    </com_atmel_avrdbg_tool_jtagicemkii>
+    <com_atmel_avrdbg_tool_jtagicemk3>
+      <ToolType xmlns="">com.atmel.avrdbg.tool.jtagicemk3</ToolType>
+      <ToolName xmlns="">JTAGICE3</ToolName>
+      <ToolNumber xmlns="">J30200002356</ToolNumber>
+      <Channel xmlns="">
+        <host>127.0.0.1</host>
+        <port>49157</port>
+        <ssl>False</ssl>
+      </Channel>
+      <ToolOptions xmlns="">
+        <InterfaceType>JTAG</InterfaceType>
+        <InterfaceProperties>
+          <JtagDbgClock>1485704</JtagDbgClock>
+          <JtagProgClock>1000000</JtagProgClock>
+          <IspClock>150000</IspClock>
+          <JtagInChain>false</JtagInChain>
+          <JtagDevicesBefore>0</JtagDevicesBefore>
+          <JtagDevicesAfter>0</JtagDevicesAfter>
+          <JtagInstrBitsBefore>0</JtagInstrBitsBefore>
+          <JtagInstrBitsAfter>0</JtagInstrBitsAfter>
+        </InterfaceProperties>
+      </ToolOptions>
+    </com_atmel_avrdbg_tool_jtagicemk3>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <AvrGcc>
+        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcc.compiler.optimization.DebugLevel>None</avrgcc.compiler.optimization.DebugLevel>
+        <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+      </AvrGcc>
+    </ToolchainSettings>
+    <MemorySettings>
+    </MemorySettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <AvrGcc>
+        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <avrgcc.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>../inc</Value>
+            <Value>../config</Value>
+            <Value>../MCU/inc</Value>
+            <Value>../driver/inc</Value>
+          </ListValues>
+        </avrgcc.compiler.directories.IncludePaths>
+        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcc.compiler.optimization.DebugLevel>Maximum (-g3)</avrgcc.compiler.optimization.DebugLevel>
+        <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+        <avrgcc.compiler.miscellaneous.OtherFlags>-std=gnu99</avrgcc.compiler.miscellaneous.OtherFlags>
+      </AvrGcc>
+    </ToolchainSettings>
+    <MemorySettings>
+      <MemorySegments>
+        <InitialStack IsEnabled="0">
+          <Address>0xfe00</Address>
+        </InitialStack>
+      </MemorySegments>
+    </MemorySettings>
+    <GenerateHexFile>True</GenerateHexFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="config\config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="config\conf_debug.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="config\conf_interrupt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="config\conf_scheduler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="config\conf_usb.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="config\conf_board.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="config\xplain_usb.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\gpio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\inc\interrupt_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\interrupt_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\power_drv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\spi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\NOT_USED_SPI\spi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\NOT_USED_SPI\spi_mega.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\zigbee_task.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\zigbee_task.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="driver\NOT_USED_SPI\spi_mega_xmega.c">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="driver\NOT_USED_SPI\spi_polled.c">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="driver\NOT_USED_SPI\spi_polled.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="driver\NOT_USED_SPI\spi_polled_buf_list.c">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="driver\usb\usb_descriptors.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\usb\usb_device_task.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\usb\usb_drv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\usb\usb_host_enum.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\usb\usb_host_task.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\usb\usb_specific_request.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\usb\usb_standard_request.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="driver\wdt_drv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\alarm_task.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\compiler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\debugger_task.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\errors.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\halSpi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\halUsart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\IncFile1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\IOPort.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\ledActions.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\led_task.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\lists.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\pll_drv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\port_pin_id.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\power_drv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\scheduler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\spi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\spi_task.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\stdarg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\task_manager.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\uart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\uart_bdr.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\uart_drv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\uart_lib.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_commun.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_commun_cdc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_commun_hid.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_commun_hub.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_commun_ms.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_descriptors.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_device_task.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_drv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_host_enum.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_host_task.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_specific_request.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_standard_request.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\usb_task.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="inc\wdt_drv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main\init.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main\lists.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main\main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main\scheduler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCU\inc\gpio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\alarm_task.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\debugger_task.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\led_task.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\spi_task.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\task_manager.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="tasks\usb_task.c">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="board" />
+    <Folder Include="driver" />
+    <Folder Include="driver\inc" />
+    <Folder Include="driver\NOT_USED_SPI" />
+    <Folder Include="driver\usb" />
+    <Folder Include="main" />
+    <Folder Include="config" />
+    <Folder Include="inc" />
+    <Folder Include="MCU" />
+    <Folder Include="MCU\inc" />
+    <Folder Include="MCU\src" />
+    <Folder Include="tasks" />
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\AvrGCC.targets" />
+</Project>
