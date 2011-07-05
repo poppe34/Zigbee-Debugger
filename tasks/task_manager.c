@@ -112,12 +112,13 @@ void TM_toUSB(packet_t *pkt)
     uint8_t len;
 	pkt->ptr = pkt->buf;
 	
-	*ptr++ = (pkt->len+3);
+	*ptr++ = (pkt->len);
 	
 	*ptr++ = pkt->task;
 	*ptr++ = pkt->subTask;
 	
-    len = pkt->len;
+	//Take off the length of the header
+    len = (pkt->len -3);
 	while(len)
 	{
         *ptr++ = *pkt->ptr++;
@@ -150,13 +151,19 @@ void TM_handler(packet_t *pkt)
 }
 void TM_removeTask(packet_t *pkt)
 {
-	list_remove(packets, pkt);
+	if(pkt)
+	{
+		list_remove(packets, pkt);
+	}		
 }
 
 void TM_freePacket(packet_t *pkt)
 {
-	list_remove(packets, pkt);
-	free(pkt);
+	if(pkt)
+	{
+		list_remove(packets, pkt);
+		free(pkt);
+	}		
 }
 
 void TM_addPacket(packet_t *pkt)

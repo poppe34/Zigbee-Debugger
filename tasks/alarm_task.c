@@ -19,7 +19,7 @@ void alarm_task_init(void)
 {
 	list_init(alarmLog);
 	verbose_level = DEBUG_LEVEL;
-	alarm_new(5, "This is my new first alarm\0");
+	alarm_new(5, "USB Debugger has been Restarted\0");
 }
 
 
@@ -101,11 +101,14 @@ void alarm_sendUSBFirst(void)
 	            pkt->dir = to_usb;
 	            pkt->task = task_alarm;
 	            pkt->subTask = first_alarm;
-	            pkt->len = alrm->length;
+				// add 3 to the length for the header of the packet
+	            pkt->len = alrm->length + 3;
 
 	            for(uint8_t x=0; x<alrm->length; x++)
+				{
 		        pkt->buf[x] = alrm->name[x];
-   
+				}
+				   
 	            alarm_freeAlarm(alrm);
 			}				
         }
@@ -118,7 +121,7 @@ void alarm_sendUSBFirst(void)
 	        pkt->dir = to_usb;
 	        pkt->task = task_alarm;
 	        pkt->subTask = first_alarm;
-	        pkt->len = 1;
+	        pkt->len = 4;
 			pkt->buf[0] = NULL;
 		}			
 	}			
@@ -141,8 +144,11 @@ void alarm_emptyLog(void)
 
 void alarm_freeAlarm(alarm_t *alrm)
 {
-	list_remove(alarmLog, alrm);
-	free(alrm);
+	if(alrm)
+	{
+		list_remove(alarmLog, alrm);
+		free(alrm);
+	}		
 }
 
 void alarm_subTaskHandler(packet_t *pkt)

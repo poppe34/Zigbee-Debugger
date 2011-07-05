@@ -38,7 +38,7 @@ void spi_task_init(void)
 	GPIO_RESET_LIGHT_make_out();
   
     PCMSK0 |= _BV(PCINT0);
-	PCICR |= _BV(PCIE0);
+//	PCICR |= _BV(PCIE0);
 
     spi_active = NO;
 	set_PCINT0_vect_cb(&spi_writeByte_CB);
@@ -124,18 +124,23 @@ void spi_startOfCB(void)
 	
 	if(display == 0x88)
 	{
+		currentPkt.dir = from_device;
 		set_SPI_STC_vect_cb(&spi_writeByte_CB);
 	}				
 	else if(display == 0xaa)
 	{
+		currentPkt.dir = from_device;
 	    set_SPI_STC_vect_cb(&spi_readByte_CB);
 	}		
 }
 
 void spi_freePacket(packet_t *pkt)
 {
-	list_remove(spi_output, pkt);
-	free(pkt);
+	if(pkt)
+	{
+		list_remove(spi_output, pkt);
+		free(pkt);
+	}		
 }
 
 void spi_readByte_CB(void)
@@ -144,6 +149,7 @@ void spi_readByte_CB(void)
 	{
 		currentPkt.len = SPDR;
 		estLength = currentPkt.len;
+		
 		currentPkt.ptr = &currentPkt.task;
 	}
 	else
