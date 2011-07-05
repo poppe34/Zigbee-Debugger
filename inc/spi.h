@@ -142,7 +142,14 @@ static inline void spi_enable_master_mode(void)
 #define WAIT_FOR_DATA_TIMEOUT(delay)   delay = DEFAULT_DELAY;                            \
                                         while((!(SPSR & _BV(SPIF))) && delay)//{delay--;}	
 #define WAIT_FOR_DATA_SLAVE				while(!(SPSR & _BV(SPIF)))					\
-										 if(GPIO_XMEGA_SS_read() == 1){	GPIO_XMEGA_IRQ_set();  sei(); spi_active = NO; inactive_count = 0; return;}
+										 if(GPIO_XMEGA_SS_read() == 1) \
+										 {\
+											GPIO_XMEGA_IRQ_set();\
+											sei(); \
+											spi_active = NO; \
+											inactive_count = 0; \
+											return;\
+										 }
 
 #define SPI_IRQ_MASTER                  GPIO_XMEGA_IRQ_clr()
                           

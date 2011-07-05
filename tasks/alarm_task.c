@@ -192,7 +192,7 @@ void alarm_subTaskHandler(packet_t *pkt)
 		break;
 			
 		default:
-		alarm("Alarm received an unknown sub-Task");
+		alarm_new(5, "Alarm received an unknown sub-Task: %x", pkt->subTask);
 		break;
 	}	
    

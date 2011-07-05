@@ -158,3 +158,9 @@ void TM_freePacket(packet_t *pkt)
 	list_remove(packets, pkt);
 	free(pkt);
 }
+
+void TM_addPacket(packet_t *pkt)
+{
+	packet_t *newPkt = TM_newPacket();
+	*newPkt = *pkt;
+}

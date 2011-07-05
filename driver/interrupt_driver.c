@@ -97,7 +97,7 @@ ISR(INT7_vect)
 ASSIGN_INTERRUPT(PCINT0_vect);
 ISR(PCINT0_vect)
 {
-    (irq_PCINT0_vect_cb)();
+    if((irq_PCINT0_vect_cb)){(irq_PCINT0_vect_cb)();}
 }
 #endif
 #endif
@@ -243,7 +243,7 @@ ISR(TIMER0_OVF_vect)
 ASSIGN_INTERRUPT(SPI_STC_vect);
 ISR(SPI_STC_vect)
 {
-    (irq_SPI_STC_vect_cb)();
+   if(irq_SPI_STC_vect_cb) {(irq_SPI_STC_vect_cb)();}
 }
 #endif
 #endif

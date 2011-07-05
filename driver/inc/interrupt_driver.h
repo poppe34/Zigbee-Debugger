@@ -14,6 +14,7 @@
 typedef void (*irq_cb_t)(void);
 
 #define CONFIG_INTERRUPT_PCINT0_vect
+#define CONFIG_INTERRUPT_SPI_STC_vect
 
 #define ASSIGN_INTERRUPT(vect) irq_cb_t irq_##vect##_cb = NULL; \
     INLINE void set_##vect##_cb(irq_cb_t irq) {irq_##vect##_cb = irq;} \

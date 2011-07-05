@@ -29,13 +29,12 @@ typedef enum data_direction
 typedef struct packet
 {
 	struct packet       *next;
-	uint8_t             buf[64];
 	uint8_t             *ptr;
-	uint8_t             dir;
+	uint8_t	             dir;
 	uint8_t             len;
 	uint8_t             task;
 	uint8_t             subTask;
-	
+	uint8_t             buf[64];
 }packet_t;
 
 enum tasks

@@ -116,6 +116,7 @@
       </MemorySegments>
     </MemorySettings>
     <GenerateHexFile>True</GenerateHexFile>
+    <OutputType>Executable</OutputType>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="config\config.h">
