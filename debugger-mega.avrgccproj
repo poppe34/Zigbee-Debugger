@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectVersion>1.0</ProjectVersion>
+    <ProjectVersion>5.0</ProjectVersion>
     <ProjectGuid>{ea63e9d9-274a-4cb5-bef3-2521cdd8ce75}</ProjectGuid>
     <avrdevice>AT90USB1287</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
@@ -72,6 +72,11 @@
         </InterfaceProperties>
       </ToolOptions>
     </com_atmel_avrdbg_tool_jtagicemk3>
+    <Language>C</Language>
+    <UseGlobalToolchain>True</UseGlobalToolchain>
+    <GlobalToolchainPath>C:\Program Files (x86)\Atmel\AVR Studio 5.0\AVR ToolChain\bin</GlobalToolchainPath>
+    <ToolchainDirPath />
+    <MakeDirPath />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>

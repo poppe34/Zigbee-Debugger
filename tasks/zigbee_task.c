@@ -48,7 +48,7 @@ void zigbee_subTaskHandler(packet_t *pkt)
 
 void zigbee_packetQTY(void)
 {
-	packet_t *pkt = TM_newPacket();
+	packet_t *pkt = TM_newPacket(YES);
 	if(pkt)
 	{
 	    pkt->len = BYTES_NEEDED_FOR_LENGTH;
@@ -88,7 +88,7 @@ void zigbee_packetFirst(void)
 
 void zigbee_newPacket(uint8_t *buf, uint8_t zlen)
 {
-	packet_t *pkt = TM_newPacket();
+	packet_t *pkt = TM_newPacket(NO);
 	
 	pkt->len = zlen;
 	pkt->ptr = (pkt->buf);
@@ -107,6 +107,5 @@ void zigbee_newPacket(uint8_t *buf, uint8_t zlen)
 	
 #ifdef DEBUG_SERVER
     list_add(zPackets, pkt);
-	TM_removeTask(pkt);
 #endif
 }

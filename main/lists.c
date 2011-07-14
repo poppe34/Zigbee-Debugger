@@ -124,7 +124,12 @@ list_tail(list_t list)
     return NULL;
   }
 
-  for(l = *list; l->next != NULL; l = l->next);
+  for(l = *list; l->next != NULL; l = l->next){
+	if(l == l->next) 
+	{
+		return(1);
+	}		
+  }	
 
   return l;
 }

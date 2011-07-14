@@ -30,7 +30,7 @@ void TM_task(void)
 	
 	if(length)
 	{
-		TM_handler(list_pop(packets));
+		TM_handler(list_head(packets));
 	}
 }
 
@@ -53,7 +53,7 @@ void TM_fromUSB(uint8_t *buf)
 	if(*buf)
 	{
 	
-        pkt = TM_newPacket();
+        pkt = TM_newPacket(YES);
 		if(pkt == NULL) 
 		{
             alarm("(task_manager)TM_fromUSB:Null Packet Returned");
@@ -86,7 +86,7 @@ void TM_fromUSB(uint8_t *buf)
 	}
 }
 
-packet_t *TM_newPacket(void)
+packet_t *TM_newPacket(Bool withListJoin)
 {
 	if(list_length(packets) >= 40)
 	{
@@ -94,15 +94,18 @@ packet_t *TM_newPacket(void)
 	  return NULL;
 	}	
 	packet_t *newPacket = (packet_t *)malloc(sizeof(packet_t));
-	
-	newPacket->ptr = newPacket->buf;
-	newPacket->dir = 0;
-	newPacket->len = 0;
-	newPacket->subTask = 0;
-	newPacket->task = 0;
-	
-	list_add(packets, newPacket);
-	
+	if(newPacket)
+	{
+		newPacket->ptr = newPacket->buf;
+		newPacket->dir = 0;
+		newPacket->len = 0;
+		newPacket->subTask = 0;
+		newPacket->task = 0;
+	}	
+	if(withListJoin)
+	{	
+		list_add(packets, newPacket);
+	}	
 	return newPacket;
 }	
 
@@ -129,25 +132,28 @@ void TM_toUSB(packet_t *pkt)
 
 void TM_handler(packet_t *pkt)
 {
-	switch(pkt->task)
+	if(pkt)
 	{
-		case task_LED:
-		    //led_subTaskHandler(pkt); I stopped this So I would not have any transmissions to the device
-		break;
+		switch(pkt->task)
+		{
+			case task_LED:
+				//led_subTaskHandler(pkt); I stopped this So I would not have any transmissions to the device
+			break;
 		
-		case task_alarm:
-		    alarm_subTaskHandler(pkt);
-		break;
+			case task_alarm:
+				alarm_subTaskHandler(pkt);
+			break;
 		
-		case task_zigbee:
-		    zigbee_subTaskHandler(pkt);
-		break;
+			case task_zigbee:
+				zigbee_subTaskHandler(pkt);
+			break;
 		
-		default:
-		    alarm("Task Manager reached and unknown task");
-		break;
-	}
-	TM_freePacket(pkt);
+			default:
+				alarm_new(5, "Task Manager reached and unknown task %x", pkt->task);
+			break;
+		}
+		TM_freePacket(pkt);
+	}	
 }
 void TM_removeTask(packet_t *pkt)
 {
@@ -168,6 +174,9 @@ void TM_freePacket(packet_t *pkt)
 
 void TM_addPacket(packet_t *pkt)
 {
-	packet_t *newPkt = TM_newPacket();
-	*newPkt = *pkt;
+	if(pkt)
+	{
+		list_add(packets, pkt);
+	}					
+		
 }

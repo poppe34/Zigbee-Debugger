@@ -15,7 +15,11 @@
 ASSIGN_INTERRUPT(INT0_vect);
 ISR(INT0_vect)
 {
-   (irq_INT0_vect_cb)();
+   if(irq_INT0_vect_cb)
+   {
+		(irq_INT0_vect_cb)();
+   }
+
 }
 #endif
 #endif

@@ -59,7 +59,9 @@ void alarm_new(uint8_t lvl, char *str, ...)
 				alrm->name[(alrm->length)] = 0;
 				alrm->length++;
 				if(alrm->length > 61)
+				{
 				    alarm("Alarm Length is to Great");
+				}					
 			    list_add(alarmLog, alrm);	
 		    }					
 	    }
@@ -70,7 +72,7 @@ void alarm_new(uint8_t lvl, char *str, ...)
 void alarm_sendQty(void)
 {
 	uint8_t alarm_len = list_length(alarmLog);
-	packet_t *pkt = TM_newPacket();
+	packet_t *pkt = TM_newPacket(YES);
 	if(pkt)
 	{
 	    pkt->dir = to_usb;
@@ -78,7 +80,7 @@ void alarm_sendQty(void)
 	    pkt->subTask = alarm_cnt;
 
 	    pkt->buf[0] = alarm_len;
-	    pkt->len = 1;
+	    pkt->len = 4;
     }	
 }
 
@@ -86,7 +88,7 @@ void alarm_sendUSBFirst(void)
 {
 	if((list_length(alarmLog)))
 	{
-	    alarm_t *alrm = list_pop(alarmLog);
+	    alarm_t *alrm = list_head(alarmLog);
 	
 	    if(alrm == NULL)
 	    {
@@ -95,7 +97,7 @@ void alarm_sendUSBFirst(void)
 	    }
 	    else
 	    {
-		    packet_t *pkt = TM_newPacket();
+		    packet_t *pkt = TM_newPacket(YES);
 			if(pkt)
 			{
 	            pkt->dir = to_usb;
@@ -115,7 +117,7 @@ void alarm_sendUSBFirst(void)
 	}
 	else
 	{
-		packet_t *pkt = TM_newPacket();
+		packet_t *pkt = TM_newPacket(YES);
 		if(pkt)
 		{
 	        pkt->dir = to_usb;

@@ -8,7 +8,7 @@
 
 #ifndef TASK_MANAGER_H_
 #define TASK_MANAGER_H_
-#define BYTES_NEEDED_FOR_LENGTH 1
+#define BYTES_NEEDED_FOR_LENGTH 4
 
 extern uint8_t buf_in[256];
 extern uint8_t rxok;
@@ -47,7 +47,7 @@ enum tasks
 void        TM_task_init(void);
 void        TM_task(void);
 void        TM_passPacket(packet_t *pkt, packet_t *newPkt);
-packet_t *  TM_newPacket(void);
+packet_t *  TM_newPacket(Bool withListJoin);
 void        TM_toUSB(packet_t *pkt);
 void        TM_fromUSB(uint8_t *buf);//TODO: I kinda want to make this a void type of buffer
 void        TM_toDevice(packet_t *pkt);
